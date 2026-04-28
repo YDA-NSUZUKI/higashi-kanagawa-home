@@ -130,7 +130,48 @@ button {
 <header>
   <div class="header-row">
     <h1>次はどっちのホーム@東神奈川</h1>
-    <div class="penguin">🐧❔</div>
+    <div class="penguin">
+      <svg width="60" height="60" viewBox="0 0 120 120">
+        <!-- 体 -->
+        <ellipse cx="60" cy="70" rx="40" ry="35" fill="#111"/>
+        <ellipse cx="60" cy="75" rx="28" ry="25" fill="#fff"/>
+      
+        <!-- 目 -->
+        <circle cx="48" cy="55" r="5" fill="#fff"/>
+        <circle cx="72" cy="55" r="5" fill="#fff"/>
+        <circle cx="48" cy="55" r="2" fill="#000"/>
+        <circle cx="72" cy="55" r="2" fill="#000"/>
+      
+        <!-- くちばし -->
+        <ellipse cx="60" cy="65" rx="6" ry="4" fill="#ffcc66"/>
+      
+        <!-- 手 -->
+        <ellipse cx="25" cy="75" rx="8" ry="18" fill="#111"/>
+        <ellipse cx="95" cy="75" rx="8" ry="18" fill="#111"/>
+      
+        <!-- 足 -->
+        <ellipse cx="48" cy="102" rx="6" ry="4" fill="#ffcc66"/>
+        <ellipse cx="72" cy="102" rx="6" ry="4" fill="#ffcc66"/>
+      
+        <!-- ハテナ（頭） -->
+        <text x="60" y="28" text-anchor="middle" font-size="26" fill="#007a3d" font-weight="bold">?</text>
+      
+        <!-- ステッキ -->
+        <line x1="90" y1="40" x2="100" y2="90" stroke="#007a3d" stroke-width="3"/>
+        <circle cx="90" cy="40" r="5" fill="#007a3d"/>
+      
+        <!-- 懐中時計 -->
+        <circle cx="30" cy="90" r="7" fill="#fff" stroke="#333" stroke-width="2"/>
+        <line x1="30" y1="90" x2="30" y2="86" stroke="#333" stroke-width="2"/>
+      
+        <!-- 軽く揺れるアニメ -->
+        <animateTransform attributeName="transform"
+          type="rotate"
+          values="-3 60 60;3 60 60;-3 60 60"
+          dur="2s"
+          repeatCount="indefinite"/>
+      </svg>
+    </div>
   </div>
 </header>
 
