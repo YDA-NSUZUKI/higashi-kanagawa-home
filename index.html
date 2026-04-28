@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>次はどっちのホーム@東神奈川</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, "Yu Gothic", sans-serif;
+  background: #eef2f0;
+  color: #222;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f6f8f7;
+}
+
+header {
+  background: linear-gradient(135deg, #007a3d, #00a650);
+  color: white;
+  padding: 18px 16px 14px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 21px;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.subtitle {
+  font-size: 12px;
+  opacity: .9;
+  margin-top: 4px;
+}
+
+.penguin {
+  font-size: 42px;
+  animation: wiggle 1.6s infinite;
+}
+
+@keyframes wiggle {
+  0%,100% { transform: rotate(0); }
+  25% { transform: rotate(8deg); }
+  75% { transform: rotate(-8deg); }
+}
+
+.toolbar {
+  padding: 12px 14px 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  background: #007a3d;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.updated {
+  font-size: 12px;
+  color: #555;
+}
+
+.status-area {
+  padding: 8px 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.status {
+  background: white;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border-left: 7px solid #007a3d;
+  font-weight: 800;
+  box-shadow: 0 1px 5px rgba(0,0,0,.08);
+}
+
+.routes {
+  padding: 8px 14px 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+  overflow: hidden;
+}
+
+.card-title {
+  background: #e7f4eb;
+  border-left: 9px solid #007a3d;
+  padding: 13px 14px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.train {
+  padding: 13px 14px;
+  border-top: 1px solid #eee;
+}
+
+.train.next {
+  background: #fff6c9;
+  padding: 18px 14px;
+}
+
+.train-label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #007a3d;
+  margin-bottom: 4px;
+}
+
+.next .train-label {
+  font-size: 15px;
+}
+
+.main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.time-area {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.next .time {
+  font-size: 38px;
+}
+
+.remaining {
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 900;
+  color: #c76b00;
+}
+
+.platform {
+  min-width: 96px;
+  text-align: center;
+  background: #007a3d;
+  color: white;
+  border-radius: 16px;
+  padding: 8px 10px;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.next .platform {
+  min-width: 120px;
+  font-size: 44px;
+  padding: 12px 10px;
+}
+
+.platform span {
+  font-size: 13px;
+  display: block;
+  margin-top: -3px;
+}
+
+.platform.warn {
+  background: #d98200;
+}
+
+.dest {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.next .dest {
+  font-size: 19px;
+}
+
+.note {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+}
+
+.warning {
+  margin-top: 7px;
+  font-size: 12px;
+  color: #a65f00;
+  font-weight: 800;
+}
+
+footer {
+  margin: 0 14px 20px;
+  padding: 12px;
+  background: white;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #555;
+  line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div class="header-row">
+    <div>
+      <h1>次はどっちのホーム<br>@東神奈川</h1>
+      <div class="subtitle">Higashi-Kanagawa Transfer Helper</div>
+    </div>
+    <div class="penguin">🐧❔</div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <button onclick="loadData()">最新に更新</button>
+  <div class="updated" id="updated">読み込み中...</div>
+</div>
+
+<div class="status-area">
+  <div class="status" id="keihinStatus">京浜東北線：確認中</div>
+  <div class="status" id="yokohamaStatus">横浜線：確認中</div>
+</div>
+
+<div class="routes">
+  <section class="card">
+    <div class="card-title">新横浜方面</div>
+    <div id="shinYokohama"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-title">品川方面</div>
+    <div id="shinagawa"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-title">横浜方面</div>
+    <div id="yokohama"></div>
+  </section>
+</div>
+
+<footer id="notice">
+  ※このページは個人用の乗り換え支援ページです。JR東日本公式サービスではありません。
+</footer>
+
+</div>
+
+<script>
+const API_URL = "https://higashi-kanagawa-api.nsuzuki.workers.dev/";
+
+async function loadData() {
+  try {
+    document.getElementById("updated").textContent = "更新中...";
+
+    const res = await fetch(API_URL);
+    const data = await res.json();
+
+    renderTrains("shinYokohama", data.shinYokohama.trains);
+    renderTrains("shinagawa", data.shinagawa.trains);
+    renderTrains("yokohama", data.yokohama.trains);
+
+    document.getElementById("keihinStatus").textContent =
+      `京浜東北線：${data.status.keihin.status}`;
+
+    document.getElementById("yokohamaStatus").textContent =
+      `横浜線：${data.status.yokohama.status}`;
+
+    document.getElementById("updated").textContent =
+      `更新：${data.updatedAt}`;
+
+    document.getElementById("notice").textContent =
+      `※このページは個人用の乗り換え支援ページです。JR東日本公式サービスではありません。${data.notice}`;
+  } catch (e) {
+    document.getElementById("updated").textContent = "取得に失敗しました";
+  }
+}
+
+function renderTrains(id, trains) {
+  const box = document.getElementById(id);
+  box.innerHTML = "";
+
+  trains.forEach((t, i) => {
+    const isFallback = t.platformSource !== "列車詳細ページ";
+
+    const label =
+      i === 0 ? "次発" :
+      i === 1 ? "次々発" :
+      "3本目";
+
+    const div = document.createElement("div");
+    div.className = i === 0 ? "train next" : "train";
+
+    div.innerHTML = `
+      <div class="train-label">${label}</div>
+      <div class="main-row">
+        <div class="time-area">
+          <div class="time">${t.time}</div>
+          <div class="remaining">${getRemainingText(t.minutes)}</div>
+        </div>
+        <div class="platform ${isFallback ? "warn" : ""}">
+          ${t.platform}
+          <span>番線${isFallback ? "候補" : ""}</span>
+        </div>
+      </div>
+      <div class="dest">${t.dest}行き</div>
+      <div class="note">${t.note || ""}</div>
+      ${isFallback ? `<div class="warning">※番線未確定：駅の発車標を確認</div>` : ""}
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+function getRemainingText(trainMinutes) {
+  const now = new Date();
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+  let diff = trainMinutes - nowMinutes;
+
+  if (diff < 0) {
+    diff += 24 * 60;
+  }
+
+  if (diff === 0) return "まもなく発車";
+  return `あと${diff}分`;
+}
+
+loadData();
+</script>
+
+</body>
+</html>
