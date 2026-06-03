@@ -331,8 +331,8 @@ function getUrgency(min) {
   let diff = min - (now.getHours() * 60 + now.getMinutes());
   if (diff < 0) diff += 1440;
 
-  if (diff <= 1) return "🚨急げ";
-  if (diff <= 3) return "🏃急げる";
+  if (diff <= 1) return "🚨無理ゲー";
+  if (diff <= 3) return "🏃急げば間に合う";
   if (diff <= 6) return "👍余裕";
   return "";
 }
