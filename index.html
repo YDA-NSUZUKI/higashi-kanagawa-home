@@ -14,7 +14,7 @@ body {
 }
 
 .app {
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
   min-height: 100vh;
   background: #f6f8f7;
@@ -23,7 +23,7 @@ body {
 header {
   background: linear-gradient(135deg, #007a3d, #00a650);
   color: white;
-  padding: 18px 16px;
+  padding: 14px 12px;
 }
 
 .header-row {
@@ -33,18 +33,21 @@ header {
 }
 
 h1 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 0;
+  line-height: 1.25;
 }
 
-.penguin {
-  font-size: 40px;
+.penguin svg {
+  width: 52px;
+  height: 52px;
 }
 
 .toolbar {
-  padding: 10px;
+  padding: 8px 10px;
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
 }
 
 button {
@@ -52,74 +55,131 @@ button {
   color: white;
   border: none;
   border-radius: 999px;
-  padding: 10px 18px;
+  padding: 9px 16px;
   font-weight: bold;
+  font-size: 14px;
+}
+
+#updated {
+  font-size: 11px;
+  color: #555;
+}
+
+.status-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 0 8px 8px;
 }
 
 .status {
-  margin: 6px 10px;
-  padding: 8px;
+  padding: 7px 6px;
   background: white;
-  border-left: 6px solid #007a3d;
-  border-radius: 10px;
+  border-left: 5px solid #007a3d;
+  border-radius: 9px;
   font-weight: bold;
+  font-size: 11px;
+}
+
+.routes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 0 6px 10px;
 }
 
 .card {
-  margin: 10px;
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 1px 5px rgba(0,0,0,.10);
 }
 
 .card-title {
-  padding: 10px;
+  padding: 8px 3px;
   background: #e7f4eb;
-  font-weight: bold;
+  font-weight: 900;
+  font-size: 13px;
+  text-align: center;
+  color: #004d28;
 }
 
 .train {
-  padding: 10px;
+  padding: 7px 4px;
   border-top: 1px solid #eee;
+  min-height: 92px;
 }
 
 .train.next {
   background: #fff4c7;
 }
 
+.train.urgent {
+  background: #ffe5e5;
+}
+
 .train-label {
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 10px;
+  font-weight: 900;
   color: #007a3d;
+  line-height: 1.2;
 }
 
 .time {
-  font-size: 26px;
-  font-weight: bold;
+  margin-top: 2px;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.remaining {
+  margin-top: 1px;
+  color: #c76b00;
+  font-size: 10px;
+  font-weight: 900;
 }
 
 .platform {
+  display: block;
+  margin-top: 5px;
   background: #007a3d;
   color: white;
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 24px;
-  font-weight: bold;
+  text-align: center;
+  padding: 4px 2px;
+  border-radius: 8px;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.1;
 }
 
 .platform.warn {
   background: #d98200;
 }
 
-.remaining {
-  color: #c76b00;
-  font-weight: bold;
+.dest {
+  margin-top: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.2;
+  word-break: keep-all;
 }
 
 .warning {
+  margin-top: 3px;
   color: #a65f00;
-  font-size: 12px;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.notice {
+  margin: 0 8px 14px;
+  padding: 8px;
+  background: white;
+  border-radius: 10px;
+  color: #555;
+  font-size: 10px;
+  line-height: 1.5;
 }
 </style>
 </head>
@@ -129,42 +189,25 @@ button {
 
 <header>
   <div class="header-row">
-    <h1>次はどっちのホーム@東神奈川</h1>
+    <h1>次はどっちのホーム<br>@東神奈川</h1>
     <div class="penguin">
       <svg width="60" height="60" viewBox="0 0 120 120">
-        <!-- 体 -->
         <ellipse cx="60" cy="70" rx="40" ry="35" fill="#111"/>
         <ellipse cx="60" cy="75" rx="28" ry="25" fill="#fff"/>
-      
-        <!-- 目 -->
         <circle cx="48" cy="55" r="5" fill="#fff"/>
         <circle cx="72" cy="55" r="5" fill="#fff"/>
         <circle cx="48" cy="55" r="2" fill="#000"/>
         <circle cx="72" cy="55" r="2" fill="#000"/>
-      
-        <!-- くちばし -->
         <ellipse cx="60" cy="65" rx="6" ry="4" fill="#ffcc66"/>
-      
-        <!-- 手 -->
         <ellipse cx="25" cy="75" rx="8" ry="18" fill="#111"/>
         <ellipse cx="95" cy="75" rx="8" ry="18" fill="#111"/>
-      
-        <!-- 足 -->
         <ellipse cx="48" cy="102" rx="6" ry="4" fill="#ffcc66"/>
         <ellipse cx="72" cy="102" rx="6" ry="4" fill="#ffcc66"/>
-      
-        <!-- ハテナ（頭） -->
         <text x="60" y="28" text-anchor="middle" font-size="26" fill="#007a3d" font-weight="bold">?</text>
-      
-        <!-- ステッキ -->
         <line x1="90" y1="40" x2="100" y2="90" stroke="#007a3d" stroke-width="3"/>
         <circle cx="90" cy="40" r="5" fill="#007a3d"/>
-      
-        <!-- 懐中時計 -->
         <circle cx="30" cy="90" r="7" fill="#fff" stroke="#333" stroke-width="2"/>
         <line x1="30" y1="90" x2="30" y2="86" stroke="#333" stroke-width="2"/>
-      
-        <!-- 軽く揺れるアニメ -->
         <animateTransform attributeName="transform"
           type="rotate"
           values="-3 60 60;3 60 60;-3 60 60"
@@ -177,25 +220,33 @@ button {
 
 <div class="toolbar">
   <button onclick="loadData()">更新</button>
-  <div id="updated"></div>
+  <div id="updated">読み込み中...</div>
 </div>
 
-<div id="keihinStatus" class="status"></div>
-<div id="yokohamaStatus" class="status"></div>
-
-<div class="card">
-  <div class="card-title">新横浜方面</div>
-  <div id="shinYokohama"></div>
+<div class="status-row">
+  <div id="keihinStatus" class="status">京浜東北線：確認中</div>
+  <div id="yokohamaStatus" class="status">横浜線：確認中</div>
 </div>
 
-<div class="card">
-  <div class="card-title">品川方面</div>
-  <div id="shinagawa"></div>
+<div class="routes">
+  <div class="card">
+    <div class="card-title">新横浜</div>
+    <div id="shinYokohama"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">品川</div>
+    <div id="shinagawa"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">横浜</div>
+    <div id="yokohama"></div>
+  </div>
 </div>
 
-<div class="card">
-  <div class="card-title">横浜方面</div>
-  <div id="yokohama"></div>
+<div id="notice" class="notice">
+  ※このページは個人用の乗り換え支援ページです。JR東日本公式サービスではありません。
 </div>
 
 </div>
@@ -204,17 +255,28 @@ button {
 const API_URL = "https://higashi-kanagawa-api.nsuzuki.workers.dev/";
 
 async function loadData() {
-  const res = await fetch(API_URL);
-  const data = await res.json();
+  try {
+    document.getElementById("updated").textContent = "取得中...";
 
-  render("shinYokohama", data.shinYokohama.trains);
-  render("shinagawa", data.shinagawa.trains);
-  render("yokohama", data.yokohama.trains);
+    const res = await fetch(API_URL);
+    const data = await res.json();
 
-  setStatus("keihinStatus", "京浜東北線", data.status.keihin.status);
-  setStatus("yokohamaStatus", "横浜線", data.status.yokohama.status);
+    render("shinYokohama", data.shinYokohama.trains);
+    render("shinagawa", data.shinagawa.trains);
+    render("yokohama", data.yokohama.trains);
 
-  document.getElementById("updated").textContent = data.updatedAt;
+    setStatus("keihinStatus", "京浜東北線", data.status.keihin.status);
+    setStatus("yokohamaStatus", "横浜線", data.status.yokohama.status);
+
+    document.getElementById("updated").textContent = data.updatedAt || "更新完了";
+
+    if (data.notice) {
+      document.getElementById("notice").textContent =
+        "※このページは個人用の乗り換え支援ページです。JR東日本公式サービスではありません。" + data.notice;
+    }
+  } catch (e) {
+    document.getElementById("updated").textContent = "取得エラー：" + e.message;
+  }
 }
 
 function render(id, trains) {
@@ -225,22 +287,27 @@ function render(id, trains) {
     const isFallback = t.platformSource !== "列車詳細ページ";
     const urgency = i === 0 ? getUrgency(t.minutes) : "";
 
-    const div = document.createElement("div");
-    div.className = i === 0 ? "train next" : "train";
+    const label =
+      i === 0 ? "次発" :
+      i === 1 ? "次々発" :
+      "3本目";
 
-    if (urgency.includes("急げ")) {
-      div.style.background = "#ffe5e5";
-    }
+    const div = document.createElement("div");
+
+    const classes = ["train"];
+    if (i === 0) classes.push("next");
+    if (urgency.includes("急げ")) classes.push("urgent");
+    div.className = classes.join(" ");
 
     div.innerHTML = `
-      <div class="train-label">${i === 0 ? "次発" : i === 1 ? "次々発" : "3本目"} ${urgency}</div>
+      <div class="train-label">${label}${urgency ? "<br>" + urgency : ""}</div>
       <div class="time">${t.time}</div>
       <div class="remaining">${getRemaining(t.minutes)}</div>
       <div class="platform ${isFallback ? "warn" : ""}">
-        ${t.platform}番線
+        ${t.platform}番
       </div>
-      <div>${t.dest}行き</div>
-      ${isFallback ? `<div class="warning">※番線未確定</div>` : ""}
+      <div class="dest">${t.dest}行き</div>
+      ${isFallback ? `<div class="warning">番線未確定</div>` : ""}
     `;
 
     box.appendChild(div);
@@ -249,15 +316,16 @@ function render(id, trains) {
 
 function getRemaining(min) {
   const now = new Date();
-  let diff = min - (now.getHours()*60 + now.getMinutes());
+  let diff = min - (now.getHours() * 60 + now.getMinutes());
   if (diff < 0) diff += 1440;
+
   if (diff === 0) return "まもなく";
   return "あと" + diff + "分";
 }
 
 function getUrgency(min) {
   const now = new Date();
-  let diff = min - (now.getHours()*60 + now.getMinutes());
+  let diff = min - (now.getHours() * 60 + now.getMinutes());
   if (diff < 0) diff += 1440;
 
   if (diff <= 1) return "🚨急げ";
@@ -270,7 +338,10 @@ function setStatus(id, name, status) {
   const el = document.getElementById(id);
   el.textContent = `${name}：${status}`;
 
-  if (status.includes("遅延") || status.includes("見合わせ")) {
+  el.style.background = "white";
+  el.style.borderLeftColor = "#007a3d";
+
+  if (status.includes("遅延") || status.includes("見合わせ") || status.includes("運休")) {
     el.style.background = "#ffeaea";
     el.style.borderLeftColor = "#c62828";
   }
