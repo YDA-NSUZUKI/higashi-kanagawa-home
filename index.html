@@ -311,7 +311,7 @@ function render(id, trains) {
         ${t.platform}番
       </div>
       <div class="dest">${t.dest}行き</div>
-      ${isFallback ? `<div class="warning">番線未確定</div>` : ""}
+      <div class="warning">${isFallback ? "番線未確定" : ""}</div>
     `;
 
     box.appendChild(div);
