@@ -82,8 +82,8 @@ button {
 }
 
 .routes {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
   padding: 0 6px 10px;
 }
@@ -91,6 +91,9 @@ button {
 .card {
   margin: 0 !important;
   min-width: 0;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .card-title {
@@ -227,20 +230,22 @@ button {
 </div>
 
 <div class="routes">
+
   <div class="card">
-    <div class="card-title">新横浜</div>
+    <div class="card-title">新横浜方面</div>
     <div id="shinYokohama"></div>
   </div>
 
   <div class="card">
-    <div class="card-title">品川</div>
+    <div class="card-title">品川方面</div>
     <div id="shinagawa"></div>
   </div>
 
   <div class="card">
-    <div class="card-title">横浜</div>
+    <div class="card-title">横浜方面</div>
     <div id="yokohama"></div>
   </div>
+
 </div>
 
 <div id="notice" class="notice">
